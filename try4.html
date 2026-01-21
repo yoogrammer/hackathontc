@@ -79,6 +79,7 @@
         }
 
         /* ==================== LOADING SCREEN ==================== */
+        /* ==================== LOADING SCREEN ==================== */
         #loader {
             position: fixed;
             inset: 0;
@@ -96,7 +97,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 1rem;
         }
 
         .loader-logo-text {
@@ -778,46 +778,51 @@
             font-weight: 600;
         }
 
-        /* ==================== THEMES - FIXED ==================== */
+        /* ==================== THEMES ==================== */
         #themes {
             background: var(--darker);
         }
 
         .themes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
 
-        .domain-card {
+        .theme-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: 25px;
+            padding: 3rem;
+            border-radius: 30px;
             backdrop-filter: blur(25px);
             transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
-        .domain-card::before {
+        .theme-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--gradient-main);
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(0, 245, 255, 0.1), transparent 50%);
+            opacity: 0;
+            transition: 0.4s;
         }
 
-        .domain-card:hover {
+        .theme-card:hover::before {
+            opacity: 1;
+        }
+
+        .theme-card:hover {
             border-color: var(--primary);
             transform: translateY(-10px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
 
-        .domain-icon {
+        .theme-icon {
             width: 70px;
             height: 70px;
             background: var(--gradient-main);
@@ -826,23 +831,39 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
         }
 
-        .domain-title {
+        .theme-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            color: var(--text-primary);
         }
 
-        .domain-description {
+        .theme-description {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 400;
             line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .theme-tag {
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            font-weight: 600;
         }
 
         /* ==================== SCHEDULE ==================== */
@@ -1057,7 +1078,6 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
             margin-bottom: 5rem;
-            justify-items: center;
         }
 
         .judge-card {
@@ -1070,8 +1090,6 @@
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
-            max-width: 350px;
-            width: 100%;
         }
 
         .judge-card::before {
@@ -1094,7 +1112,6 @@
             background: radial-gradient(circle at 50% 0%, rgba(0, 245, 255, 0.1), transparent 60%);
             opacity: 0;
             transition: 0.4s;
-            pointer-events: none;
         }
 
         .judge-card:hover {
@@ -1127,10 +1144,6 @@
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-        }
-
-        img.judge-image {
-            display: block;
         }
 
         .judge-card:hover .judge-image {
@@ -1267,8 +1280,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         .mentor-card {
@@ -1334,7 +1345,7 @@
             color: var(--text-muted);
         }
 
-        /* ==================== PRIZES - FIXED FOR 2 ITEMS ==================== */
+        /* ==================== PRIZES ==================== */
         #prizes {
             background: radial-gradient(ellipse 60% 40% at 30% 20%, rgba(247, 37, 133, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse 60% 40% at 70% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
@@ -1342,9 +1353,10 @@
 
         .prizes-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            max-width: 800px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            align-items: flex-end;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -1372,9 +1384,10 @@
 
         .prize-card.featured {
             border-color: var(--primary);
+            padding: 5rem 2.5rem;
             background: linear-gradient(180deg, rgba(124, 58, 237, 0.15), transparent);
             box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .prize-card:hover {
@@ -1384,7 +1397,7 @@
         }
 
         .prize-card.featured:hover {
-            transform: translateY(-15px) scale(1.05);
+            transform: translateY(-15px) scale(1.1);
         }
 
         .prize-rank {
@@ -1488,7 +1501,6 @@
             font-weight: 600;
             font-size: 1rem;
             transition: color 0.3s ease;
-            gap: 1rem;
         }
 
         .faq-question:hover {
@@ -1498,7 +1510,6 @@
         .faq-icon {
             width: 30px;
             height: 30px;
-            min-width: 30px;
             border: 2px solid var(--border-color);
             border-radius: 50%;
             display: flex;
@@ -1558,7 +1569,6 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at center, rgba(124, 58, 237, 0.1), transparent 70%);
-            pointer-events: none;
         }
 
         .register-box-content {
@@ -1584,14 +1594,15 @@
             font-size: 1.05rem;
         }
 
-        /* ==================== CONTACT - FIXED FOR SINGLE COLUMN ==================== */
+        /* ==================== CONTACT ==================== */
         #contact {
             background: var(--darker);
         }
 
         .contact-grid {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
         }
 
         .contact-info {
@@ -1600,15 +1611,12 @@
             border-radius: 30px;
             padding: 3rem;
             backdrop-filter: blur(15px);
-            max-width: 600px;
-            width: 100%;
         }
 
         .contact-info h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
             margin-bottom: 2rem;
-            text-align: center;
         }
 
         .contact-item {
@@ -1657,6 +1665,63 @@
 
         .contact-details a:hover {
             color: var(--text-primary);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: blur(15px);
+        }
+
+        .contact-form h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(124, 58, 237, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 245, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
         }
 
         /* ==================== FOOTER ==================== */
@@ -1736,7 +1801,9 @@
 
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 1200px) {
-            .about-grid {
+
+            .about-grid,
+            .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 4rem;
             }
@@ -1752,10 +1819,6 @@
 
             .prize-card.featured {
                 transform: none;
-            }
-
-            .prize-card.featured:hover {
-                transform: translateY(-15px);
             }
 
             .judges-grid {
@@ -1836,11 +1899,6 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-brand p {
-                max-width: 100%;
             }
 
             .register-box {
@@ -1868,19 +1926,6 @@
             .mentors-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .contact-info {
-                padding: 2rem;
-            }
-
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .contact-icon {
-                margin: 0 auto;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1902,15 +1947,6 @@
 
             .mentors-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .faq-question {
-                padding: 1.2rem 1.5rem;
-                font-size: 0.95rem;
-            }
-
-            .faq-answer-content {
-                padding: 0 1.5rem 1.5rem;
             }
         }
     </style>
@@ -1957,7 +1993,7 @@
                 <li><a href="#judges" class="nav-link nav-smooth-link">Judges</a></li>
                 <li><a href="#prizes" class="nav-link nav-smooth-link">Prizes</a></li>
                 <li><a href="#faq" class="nav-link nav-smooth-link">FAQ</a></li>
-                <li><a href="https://brockncode.ct.ws/" class="nav-cta">BrocknCode</a></li>
+                <li><a href="https://brockncode.ct.ws/" class="nav-cta nav-smooth-link">BrocknCode</a></li>
             </ul>
         </div>
     </nav>
@@ -2048,7 +2084,8 @@
                 <h2 class="section-title">What is CodeVerse?</h2>
                 <p class="section-description">
                     CodeVerse is an offline hackathon organized by Team BrocknCode at Tuljaram Chaturchand College (TC
-                    College), Baramati, Maharashtra, where innovation meets execution.
+                    College), Baramati,
+                    Maharashtra, where innovation meets execution.
                 </p>
             </div>
 
@@ -2118,59 +2155,152 @@
         </div>
     </section>
 
-    <!-- Themes Section - FIXED -->
+    <!-- Themes Section -->
     <section id="themes">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">Innovation Domains</span>
-                <h2 class="section-title">Themes & Domains</h2>
+                <h2 class="section-title">Themes & Technologies</h2>
                 <p class="section-description">
                     Build solutions in any domain using cutting-edge technologies. Problem statements will be revealed
                     on the event day.
                 </p>
             </div>
+            <div class="container">
 
-            <div class="themes-grid">
-                <div class="domain-card gsap-reveal-card">
-                    <div class="domain-icon">🎓</div>
-                    <h3 class="domain-title">Campus Life and Education</h3>
-                    <p class="domain-description">
+                <!-- Domain 1 -->
+                <div class="section-header">
+                    <!-- <span class="section-badge">Innovation Domain</span> -->
+                    <h2 class="section-title">Campus Life and Education</h2>
+                    <p class="section-description">
                         Solutions that improve academic experiences or campus related activities.
                     </p>
                 </div>
 
-                <div class="domain-card gsap-reveal-card">
-                    <div class="domain-icon">🏥</div>
-                    <h3 class="domain-title">Health Care</h3>
-                    <p class="domain-description">
+                <!-- Domain 2 -->
+                <div class="section-header">
+                    <!-- <span class="section-badge">Innovation Domain</span> -->
+                    <h2 class="section-title">Health Care</h2>
+                    <p class="section-description">
                         Technology based ideas that promote health awareness, monitoring, or healthcare services.
                     </p>
                 </div>
 
-                <div class="domain-card gsap-reveal-card">
-                    <div class="domain-icon">🤖</div>
-                    <h3 class="domain-title">AI in Everyday Life</h3>
-                    <p class="domain-description">
+                <!-- Domain 3 -->
+                <div class="section-header">
+                    <!-- <span class="section-badge">Innovation Domain</span> -->
+                    <h2 class="section-title">AI in Everyday Life</h2>
+                    <p class="section-description">
                         Simple and practical applications of artificial intelligence in daily life.
                     </p>
                 </div>
 
-                <div class="domain-card gsap-reveal-card">
-                    <div class="domain-icon">🔗</div>
-                    <h3 class="domain-title">Web3 Applications</h3>
-                    <p class="domain-description">
+                <!-- Domain 4 -->
+                <div class="section-header">
+                    <!-- <span class="section-badge">Innovation Domain</span> -->
+                    <h2 class="section-title">Web3 Applications</h2>
+                    <p class="section-description">
                         Innovative solutions using basic concepts of blockchain and decentralized applications.
                     </p>
                 </div>
 
-                <div class="domain-card gsap-reveal-card">
-                    <div class="domain-icon">♿</div>
-                    <h3 class="domain-title">Accessibility Technology</h3>
-                    <p class="domain-description">
+                <!-- Domain 5 -->
+                <div class="section-header">
+                    <!-- <span class="section-badge">Innovation Domain</span> -->
+                    <h2 class="section-title">Accessibility Technology</h2>
+                    <p class="section-description">
                         Solutions designed to support people with disabilities or special needs.
                     </p>
                 </div>
+
             </div>
+
+            <!-- 
+            <div class="themes-grid">
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">🌐</div>
+                    <h3 class="theme-title">Web Development</h3>
+                    <p class="theme-description">
+                        Create powerful web applications using modern frameworks. Build full-stack solutions that solve
+                        real-world problems with elegant UI/UX.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">React</span>
+                        <span class="theme-tag">Node.js</span>
+                        <span class="theme-tag">Next.js</span>
+                    </div>
+                </div>
+
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">📱</div>
+                    <h3 class="theme-title">Mobile Apps</h3>
+                    <p class="theme-description">
+                        Develop innovative mobile applications for Android or iOS. Create apps that are user-friendly,
+                        efficient, and solve everyday challenges.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">Flutter</span>
+                        <span class="theme-tag">React Native</span>
+                        <span class="theme-tag">Kotlin</span>
+                    </div>
+                </div>
+
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">🤖</div>
+                    <h3 class="theme-title">AI & Machine Learning</h3>
+                    <p class="theme-description">
+                        Leverage artificial intelligence and machine learning to create intelligent solutions. Build
+                        models that predict, analyze, and automate.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">TensorFlow</span>
+                        <span class="theme-tag">PyTorch</span>
+                        <span class="theme-tag">Scikit-learn</span>
+                    </div>
+                </div>
+
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">💬</div>
+                    <h3 class="theme-title">Chatbots & LLMs</h3>
+                    <p class="theme-description">
+                        Design conversational AI using chatbots and large language models. Create intelligent assistants
+                        that understand and respond naturally.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">GPT API</span>
+                        <span class="theme-tag">LangChain</span>
+                        <span class="theme-tag">Dialogflow</span>
+                    </div>
+                </div>
+
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">🔗</div>
+                    <h3 class="theme-title">Blockchain & Web3</h3>
+                    <p class="theme-description">
+                        Explore decentralized technologies and build the next generation of web applications. Smart
+                        contracts, DApps, and more.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">Solidity</span>
+                        <span class="theme-tag">Ethereum</span>
+                        <span class="theme-tag">Web3.js</span>
+                    </div>
+                </div>
+
+                <div class="theme-card gsap-reveal-card">
+                    <div class="theme-icon">⚡</div>
+                    <h3 class="theme-title">IoT & Hardware</h3>
+                    <p class="theme-description">
+                        Connect the physical and digital worlds. Build IoT solutions that collect data, automate
+                        processes, and enhance experiences.
+                    </p>
+                    <div class="theme-tags">
+                        <span class="theme-tag">Arduino</span>
+                        <span class="theme-tag">Raspberry Pi</span>
+                        <span class="theme-tag">MQTT</span>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </section>
 
@@ -2225,14 +2355,12 @@
                         <div class="timeline-item gsap-reveal-card">
                             <div class="timeline-time">2:00 PM - 7:30 PM</div>
                             <h4 class="timeline-title">Hacking Phase - 2 🔥</h4>
-                            <p class="timeline-desc">Continue building your solution. Push through and complete your
-                                project!</p>
+                            <p class="timeline-desc">End of Day 1. Rest up for the big presentation day tomorrow!</p>
                         </div>
                         <div class="timeline-item gsap-reveal-card">
                             <div class="timeline-time">7:30 PM - 8:00 PM</div>
-                            <h4 class="timeline-title">GitHub Repo Submission</h4>
-                            <p class="timeline-desc">Submit your code repository. Ensure all documentation is complete.
-                            </p>
+                            <h4 class="timeline-title"> GitHub Repo submission</h4>
+                            <p class="timeline-desc">End of Day 1. Rest up for the big presentation day tomorrow!</p>
                         </div>
                         <div class="timeline-item gsap-reveal-card">
                             <h4 class="timeline-title">Day 1 Wrap-up</h4>
@@ -2249,9 +2377,9 @@
                     <div class="timeline">
                         <div class="timeline-item gsap-reveal-card">
                             <div class="timeline-time">10:00 AM</div>
-                            <h4 class="timeline-title">Prepare Presentation Materials</h4>
-                            <p class="timeline-desc">Documentation and presentation materials before
-                                the presentation starts.</p>
+                            <h4 class="timeline-title">Prepare Presentation Materials </h4>
+                            <p class="timeline-desc"> Documentation, and presentation materials before
+                                the presentation Starts .</p>
                         </div>
                         <div class="timeline-item gsap-reveal-card">
                             <div class="timeline-time">11:00 AM - 2:00 PM</div>
@@ -2303,8 +2431,8 @@
                     <h3><span class="rule-icon">📝</span> Registration & Eligibility</h3>
                     <ul class="rule-list">
                         <li>Open for students from all colleges</li>
-                        <li>Paid registration (fee ₹100)</li>
-                        <li>Registration via college website</li>
+                        <li>Paid registration (fee 100rs)</li>
+                        <li>Registration via collage website</li>
                         <li>Open until hackathon starts</li>
                         <li>Valid student ID required at venue</li>
                     </ul>
@@ -2374,12 +2502,11 @@
 
             <!-- Judges -->
             <div class="judges-grid">
-                <!-- Judge 1 -->
+                <!-- Judge 1 - Example with details -->
                 <div class="judge-card gsap-reveal-card">
                     <div class="judge-image-container">
-                        <img src="kishor-bagal.jpeg" alt="Kishor Bagal" class="judge-image"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                        <div class="judge-image" style="display:none;">👨‍💻</div>
+                        <img src="kishor-bagal.jpeg" alt="Kishor Bagal" class="judge-image" />
+                        <!-- <div class="judge-image">👨‍💻</div> -->
                         <div class="judge-image-ring"></div>
                     </div>
 
@@ -2399,6 +2526,41 @@
                         <a href="#" title="Twitter">🐦</a>
                     </div>
                 </div>
+
+                <!-- 
+                <!-- Judge 2 
+                <div class="judge-card gsap-reveal-card">
+                    <div class="judge-image-container">
+                        <div class="judge-image">👩‍💼</div>
+                        <div class="judge-image-ring"></div>
+                    </div>
+                    <h3 class="judge-name">Priya Sharma</h3>
+                    <p class="judge-title">Technical Judge</p>
+                    <p class="judge-company">Senior Engineer, Tech Corp</p>
+                    <p class="judge-bio">Full-stack developer with expertise in React, Node.js, and cloud architecture.
+                        Open source contributor.</p>
+                    <div class="judge-social">
+                        <a href="#" title="LinkedIn">🔗</a>
+                        <a href="#" title="GitHub">💻</a>
+                    </div>
+                </div>
+
+                <!-- Judge 3 
+                <div class="judge-card gsap-reveal-card">
+                    <div class="judge-image-container">
+                        <div class="judge-image">👨‍🔬</div>
+                        <div class="judge-image-ring"></div>
+                    </div>
+                    <h3 class="judge-name">Amit Patil</h3>
+                    <p class="judge-title">Innovation Judge</p>
+                    <p class="judge-company">Startup Founder & CEO</p>
+                    <p class="judge-bio">Serial entrepreneur with 3 successful exits. Passionate about mentoring young
+                        innovators and tech startups.</p>
+                    <div class="judge-social">
+                        <a href="#" title="LinkedIn">🔗</a>
+                        <a href="#" title="Website">🌐</a>
+                    </div>
+                </div> -->
 
                 <!-- TBA Judge -->
                 <div class="judge-card tba gsap-reveal-card">
@@ -2421,7 +2583,45 @@
                     amazing projects.</p>
             </div>
 
+            <!-- <div class="mentors-grid">
+                <div class="mentor-card gsap-reveal-card">
+                    <div class="mentor-image">🧑‍🏫</div>
+                    <h4 class="mentor-name">Rahul Deshmukh</h4>
+                    <p class="mentor-expertise">Web Development</p>
+                </div>
+
+                <div class="mentor-card gsap-reveal-card">
+                    <div class="mentor-image">👩‍🔬</div>
+                    <h4 class="mentor-name">Sneha Joshi</h4>
+                    <p class="mentor-expertise">AI & Machine Learning</p>
+                </div>
+
+                <div class="mentor-card gsap-reveal-card">
+                    <div class="mentor-image">👨‍💻</div>
+                    <h4 class="mentor-name">Vikram Singh</h4>
+                    <p class="mentor-expertise">Mobile Development</p>
+                </div>
+
+                <div class="mentor-card gsap-reveal-card">
+                    <div class="mentor-image">🧑‍🎓</div>
+                    <h4 class="mentor-name">Aishwarya Kulkarni</h4>
+                    <p class="mentor-expertise">UI/UX Design</p>
+                </div>
+
+                <div class="mentor-card gsap-reveal-card">
+                    <div class="mentor-image">👨‍🔧</div>
+                    <h4 class="mentor-name">Sanjay More</h4>
+                    <p class="mentor-expertise">Blockchain & Web3</p>
+                </div>
+
+                <div class="mentor-card tba gsap-reveal-card">
+                    <div class="mentor-image">➕</div>
+                    <h4 class="mentor-name">More Coming</h4>
+                    <p class="mentor-expertise">TBA</p>
+                </div>
+            </div> -->
             <div class="mentors-grid">
+
                 <div class="mentor-card tba gsap-reveal-card">
                     <div class="mentor-image">🧑‍🏫</div>
                     <h4 class="mentor-name">To Be Announced</h4>
@@ -2437,15 +2637,27 @@
                     <h4 class="mentor-name">To Be Announced</h4>
                 </div>
 
+                <!-- <div class="mentor-card tba gsap-reveal-card">
+                    <div class="mentor-image">🧑‍🎓</div>
+                    <h4 class="mentor-name">To Be Announced</h4>
+                </div>
+
+                <div class="mentor-card tba gsap-reveal-card">
+                    <div class="mentor-image">👨‍🔧</div>
+                    <h4 class="mentor-name">To Be Announced</h4>
+                </div> -->
+
                 <div class="mentor-card tba gsap-reveal-card">
                     <div class="mentor-image">➕</div>
                     <h4 class="mentor-name">More Coming Soon</h4>
                 </div>
+
             </div>
+
         </div>
     </section>
 
-    <!-- Prizes Section - FIXED -->
+    <!-- Prizes Section -->
     <section id="prizes">
         <div class="container">
             <div class="section-header">
@@ -2456,6 +2668,7 @@
                 </p>
             </div>
             <div class="prizes-grid">
+
                 <div class="prize-card featured gsap-reveal-card">
                     <span class="prize-rank">First Prize</span>
                     <span class="prize-trophy">🥇</span>
@@ -2473,7 +2686,9 @@
                         Runner up team demonstrating strong technical skills and creativity.
                     </p>
                 </div>
+
             </div>
+
 
             <div class="prizes-info">
                 <p>🎓 <span class="highlight">All participants will receive certificates of participation</span></p>
@@ -2517,7 +2732,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="faq-item gsap-reveal-card">
                     <div class="faq-question">
                         <span>How much is the registration fee?</span>
@@ -2526,11 +2740,12 @@
                     <div class="faq-answer">
                         <div class="faq-answer-content">
                             The registration fee is ₹100 per head. Registration is paid and will be done through a
-                            college website.
+                            collage website.
                             Registration remains open until the hackathon begins.
                         </div>
                     </div>
                 </div>
+
 
                 <div class="faq-item gsap-reveal-card">
                     <div class="faq-question">
@@ -2545,7 +2760,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="faq-item gsap-reveal-card">
                     <div class="faq-question">
                         <span>What technologies can we use?</span>
@@ -2615,7 +2829,6 @@
             </div>
         </div>
     </section>
-
     <!-- Register Section -->
     <section id="register">
         <div class="container">
@@ -2648,7 +2861,8 @@
         </div>
     </section>
 
-    <!-- Contact Section - FIXED -->
+
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="section-header">
@@ -2685,7 +2899,7 @@
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <h4>Venue</h4>
-                            <p>BCS (Computer Science) Dept, Tuljaram Chaturchand College</p>
+                            <p>Bcs(Computer Science) dept,Tuljaram Chaturchand College</p>
                             <p>Baramati, Maharashtra</p>
                         </div>
                     </div>
@@ -2694,13 +2908,40 @@
                         <div class="contact-icon">🏢</div>
                         <div class="contact-details">
                             <h4>Organized By</h4>
-                            <p>BrocknCode &</p>
-                            <p>BCS (Computer Science) Dept, Tuljaram Chaturchand College</p>
+                            <p>Brockn Code &</p>
+                            <p>Bcs(Computer Science) dept,Tuljaram Chaturchand College</p>
                         </div>
                     </div>
                 </div>
+                <!-- 
+                <div class="contact-form gsap-reveal-card">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>College Name</label>
+                            <input type="text" placeholder="Enter your college name">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary magnetic"
+                            style="width: 100%; justify-content: center;">
+                            <span>Send Message</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div> -->
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
@@ -2709,8 +2950,7 @@
             <div class="footer-brand">
                 <a href="#home" class="footer-logo nav-smooth-link">CODEVERSE</a>
                 <p>This Is Where Builders Rise</p>
-                <p style="margin-top: 1rem;">An offline hackathon organized Team BrocknCode by Tuljaram Chaturchand
-                    College, Baramati,
+                <p style="margin-top: 1rem;">An offline hackathon organized by Tuljaram Chaturchand College, Baramati,
                     Maharashtra.</p>
             </div>
 
@@ -2740,10 +2980,10 @@
                 <h4>Contact</h4>
                 <ul class="footer-links">
                     <li><a href="mailto:brockncode@gmail.com">brockncode@gmail.com</a></li>
-                    <li>BrocknCode</li>
-                    <li>Bcs (Computer Science) Dept</li>
-                    <li>Tuljaram Chaturchand College, Baramati</li>
+                    <li>Brockn Code</li>
+                    <li>Bcs(Computer Science) dept, Tuljaram Chaturchand College, Baramati</li>
                     <li>Maharashtra, India</li>
+
                 </ul>
             </div>
         </div>
@@ -2908,11 +3148,7 @@
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true
         });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
         // Smooth Scroll for Links
@@ -2967,15 +3203,15 @@
                 percentElement.textContent = '100';
 
                 const tl = gsap.timeline();
-                tl.to('.loader-bar-fill', { width: '100%', duration: 0.3, ease: 'power3.inOut' })
-                    .to('.loader-logo-text', { letterSpacing: '0.8em', opacity: 0, duration: 0.3, ease: 'power4.in' })
-                    .to('#loader', { yPercent: -100, duration: 0.5, ease: 'expo.inOut' })
-                    .from('.hero-badge', { y: 20, opacity: 0, duration: 0.4 })
-                    .from('.hero-title-text', { yPercent: 110, stagger: 0.08, duration: 0.5, ease: 'power4.out' }, '-=0.3')
-                    .from('.hero-tagline', { opacity: 0, y: 30, duration: 0.4, ease: 'power3.out' }, '-=0.3')
-                    .from('.hero-info-grid', { opacity: 0, y: 30, duration: 0.4, ease: 'power3.out' }, '-=0.2')
-                    .from('.hero-countdown', { opacity: 0, y: 30, duration: 0.4, ease: 'power3.out' }, '-=0.2')
-                    .from('.hero-buttons', { opacity: 0, y: 30, duration: 0.4, ease: 'power3.out' }, '-=0.2');
+                tl.to('.loader-bar-fill', { width: '100%', duration: 0.5, ease: 'power3.inOut' })
+                    .to('.loader-logo-text', { letterSpacing: '0.8em', opacity: 0, duration: 0.6, ease: 'power4.in' })
+                    .to('#loader', { yPercent: -100, duration: 1, ease: 'expo.inOut' })
+                    .from('.hero-badge', { y: 20, opacity: 0, duration: 0.8 })
+                    .from('.hero-title-text', { yPercent: 110, stagger: 0.15, duration: 1.2, ease: 'power4.out' }, '-=0.8')
+                    .from('.hero-tagline', { opacity: 0, y: 30, duration: 1, ease: 'power3.out' }, '-=0.6')
+                    .from('.hero-info-grid', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+                    .from('.hero-countdown', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+                    .from('.hero-buttons', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4');
             }, 2000);
         };
 
@@ -2985,14 +3221,15 @@
             if (title) {
                 gsap.from(title, {
                     scrollTrigger: { trigger: section, start: 'top 85%' },
-                    y: 50, opacity: 0, duration: 0.5, ease: 'power4.out'  // Changed 1.2 → 0.5
+                    y: 50, opacity: 0, duration: 1.2, ease: 'power4.out'
                 });
             }
         });
+
         gsap.utils.toArray('.gsap-reveal-card').forEach((card, i) => {
             gsap.from(card, {
                 scrollTrigger: { trigger: card, start: 'top 90%' },
-                y: 40, opacity: 0, duration: 0.4, delay: i * 0.02, ease: 'power3.out'  // Faster values
+                y: 80, opacity: 0, duration: 1, delay: i * 0.05, ease: 'power3.out'
             });
         });
 
@@ -3029,7 +3266,7 @@
 
         // ==================== COUNTDOWN TIMER ====================
         function updateCountdown() {
-            const eventDate = new Date(2026, 0, 28, 8, 0, 0);
+            const eventDate = new Date(2026, 0, 28, 9, 0, 0);
             const now = new Date();
             const diff = eventDate - now;
 
@@ -3068,6 +3305,16 @@
                 }
             });
         });
+
+        // ==================== CONTACT FORM ====================
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+        }
 
         // ==================== CONSOLE MESSAGE ====================
         console.log('%c🚀 CODEVERSE', 'font-size: 40px; font-weight: bold; background: linear-gradient(135deg, #00f5ff 0%, #7c3aed 50%, #f72585 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
