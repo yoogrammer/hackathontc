@@ -31,7 +31,10 @@
             --text-muted: #6b7280;
             --gradient-main: linear-gradient(135deg, #00f5ff 0%, #7c3aed 50%, #f72585 100%);
         }
-
+        :root::-webkit-scrollbar
+        {
+            width: 0px;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -410,12 +413,12 @@
         <div class="nav-container">
             <a href="#home" class="nav-logo">CODEVERSE</a>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#themes" class="nav-link">Themes</a></li>
-                <li><a href="#schedule" class="nav-link">Schedule</a></li>
-                <li><a href="#prizes" class="nav-link">Prizes</a></li>
-                <li><a href="#register" class="nav-cta">Register</a></li>
+                <li><a href="#home" class="nav-link nav-smooth-link">Home</a></li>
+                <li><a href="#about" class="nav-link nav-smooth-link">About</a></li>
+                <li><a href="#themes" class="nav-link nav-smooth-link">Themes</a></li>
+                <li><a href="#schedule" class="nav-link nav-smooth-link">Schedule</a></li>
+                <li><a href="#prizes" class="nav-link nav-smooth-link">Prizes</a></li>
+                <li><a href="#register" class="nav-cta nav-smooth-link">Register</a></li>
             </ul>
         </div>
     </nav>
@@ -436,8 +439,8 @@
             <p class="hero-tagline">This Is Where Builders Rise</p>
 
             <div class="hero-buttons">
-                <a href="#register" class="btn btn-primary magnetic" data-strength="50">Register Now</a>
-                <a href="#about" class="btn btn-secondary magnetic" data-strength="25">Explore More</a>
+                <a href="#register" class="btn btn-primary magnetic nav-smooth-link" data-strength="50">Register Now</a>
+                <a href="#about" class="btn btn-secondary magnetic nav-smooth-link" data-strength="25">Explore More</a>
             </div>
         </div>
     </section>
@@ -549,9 +552,9 @@
             <div class="footer-section">
                 <h4>Hackathon</h4>
                 <ul class="footer-links">
-                    <li><a href="#about">The Mission</a></li>
-                    <li><a href="#themes">Tracks</a></li>
-                    <li><a href="#schedule">Timeline</a></li>
+                    <li><a href="#about" class="nav-smooth-link">The Mission</a></li>
+                    <li><a href="#themes" class="nav-smooth-link">Tracks</a></li>
+                    <li><a href="#schedule" class="nav-smooth-link">Timeline</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -738,13 +741,32 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // Custom Cursor
-        const follower = document.querySelector('.cursor-follower');
-        const dot = document.querySelector('.cursor-dot');
-        window.addEventListener('mousemove', (e) => {
-            gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.8, ease: 'power4.out' });
-            gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.15 });
+        // --- SMOOTH SCROLL FOR LINKS ---
+        document.querySelectorAll('.nav-smooth-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        // lenis.scrollTo handles the smooth gliding
+                        lenis.scrollTo(target, {
+                            offset: -80, // Offset for sticky navbar
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                }
+            });
         });
+
+        // // Custom Cursor
+        // const follower = document.querySelector('.cursor-follower');
+        // const dot = document.querySelector('.cursor-dot');
+        // window.addEventListener('mousemove', (e) => {
+        //     gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.8, ease: 'power4.out' });
+        //     gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.15 });
+        // });
 
         // Loader Sequence
         window.onload = () => {
